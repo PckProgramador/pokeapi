@@ -1,3 +1,9 @@
+/**
+ * Funcion que edita la carta para mostrar la imagen frontal y la informacion deseada
+ * @param {Object} objeto el objeto pokemon del que sacamos los datos
+ * @param {HTMLElement} card carta a la que vamos a añadir la informacion
+ * @param {HTMLElement} cardBody parte de la carta donde va la informacion como el tipo o las habiliades
+ */
 export function createListFront(objeto, card, cardBody) {
   //Borramos  la  lista previa  dentro de la card
   const lista1 = card.querySelector("ul");
@@ -20,6 +26,13 @@ export function createListFront(objeto, card, cardBody) {
   //Introducimos la lista al body de la carta
   cardBody.appendChild(lista);
 }
+
+/**
+ * Funcion que edita la carta para mostrar la imagen trasera y la informacion deseada
+ * @param {Object} objeto el objeto pokemon del que sacamos los datos
+ * @param {HTMLElement} card carta a la que vamos a añadir la informacion
+ * @param {HTMLElement} cardBody parte de la carta donde va la informacion como el tipo o las habiliades
+ */
 
 export function createListBack(objeto, card, cardBody) {
   //Borramos  la  lista previa  dentro de la card

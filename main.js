@@ -1,7 +1,6 @@
 /**
  * Imports
  */
-
 import { renderCard } from "./src/components/renderCardPokemon/renderCardPokemon";
 import {
   getPokemonByName,
@@ -16,7 +15,6 @@ import {
 /**
  * Variables globales
  */
-
 const urlPokemon = "https://pokeapi.co/api/v2/pokemon/";
 const app = document.getElementById("app");
 const botonBuscar = document.getElementById("boton");
@@ -25,6 +23,7 @@ const inputPaginaSiguiente = document.getElementById("botonSiguiente");
 const inputPaginaAnterior = document.getElementById("botonAnterior");
 const paginaIndex = document.getElementById("pagina");
 let paginaActual = 1;
+
 /**
  * funciones
  */
@@ -45,22 +44,29 @@ function init() {
   }
 }
 
+/**
+ * Funcion que borra todas las cartas mostradas en la vista
+ */
 function borrarCartas() {
   let get = document.querySelectorAll(".card");
   get.forEach((element) => {
     element.remove();
   });
 }
+
 /**
  * Logica
  */
 init();
 paginaIndex.textContent = "Pagina : " + paginaActual;
-//Si ya hemos estado en esta pagina
+
 /**
  * Eventos
  */
 
+/**
+ * Evento dar vuelta a las imagenes
+ */
 app.addEventListener("dblclick", (e) => {
   if (e.target.classList.contains("card-img-top")) {
     const card = e.target.closest(".card");
@@ -71,14 +77,20 @@ app.addEventListener("dblclick", (e) => {
   }
 });
 
+/**
+ * Evento buscador de pokemons por BOTON
+ */
 botonBuscar.addEventListener("click", (e) => {
+  //Si ya existe un dialog previo lo borramos
   const dialog = document.getElementsByTagName("dialog");
   if (dialog[0]) {
     dialog[0].remove();
   }
+  //Creamos el dialog para el pokemon buscado
   getPokemonByName(urlPokemon, input.value, (data) => {
     let carta1 = renderCard(data);
     const modal = document.createElement("dialog");
+    //Unimos al div contenedor el dialog y mostramos la información
     app.appendChild(modal);
     modal.appendChild(carta1);
     modal.showModal();
@@ -88,18 +100,21 @@ botonBuscar.addEventListener("click", (e) => {
   });
 });
 
+/**
+ * Evento buscador de pokemons por TECLA
+ */
 input.addEventListener("keydown", (e) => {
+  //Si ya existe un dialog previo lo borramos
   const dialog = document.getElementsByTagName("dialog");
   if (dialog[0]) {
     dialog[0].remove();
   }
+  //Creamos el dialog para el pokemon buscado
   if (e.key == "Enter") {
     getPokemonByName(urlPokemon, input.value, (data) => {
       let carta1 = renderCard(data);
-      //esto es pra insertarlo el primero
-      // app.insertBefore(carta1, app.firstChild);
-      //con un DIALOG
       const modal = document.createElement("dialog");
+      //Unimos al div contenedor el dialog y mostramos la información
       app.appendChild(modal);
       modal.appendChild(carta1);
       modal.showModal();
@@ -110,6 +125,9 @@ input.addEventListener("keydown", (e) => {
   }
 });
 
+/**
+ * Evento BOTON pagina siguiente
+ */
 inputPaginaAnterior.addEventListener("click", (e) => {
   if (paginaActual > 1) {
     paginaActual--;
@@ -124,6 +142,9 @@ inputPaginaAnterior.addEventListener("click", (e) => {
   paginaIndex.textContent = "Pagina : " + paginaActual;
 });
 
+/**
+ * Evento BOTON pagina anterior
+ */
 inputPaginaSiguiente.addEventListener("click", (e) => {
   let numeroPaginas = getPaginasExistentes();
   borrarCartas();

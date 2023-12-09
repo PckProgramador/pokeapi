@@ -1,6 +1,6 @@
 /**
  *
- * @param {*} pagina
+ * @param {Number} pagina
  * @returns El array de pokemons de la pagina en concreto
  */
 export function getPokemonsPorPagina(pagina) {

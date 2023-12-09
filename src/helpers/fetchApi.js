@@ -41,6 +41,12 @@ async function generar9pokemons(urlStandard, callback, totalPokemons) {
   }
 }
 
+/**
+ *
+ * @param {String} urlStandard url de la pokeapi sin parametros
+ * @param {String} name nombre del pokemon
+ * @param {callback} callback funcion que va a utilizar la data de ese pokemon en concreto
+ */
 export async function getPokemonByName(urlStandard, name, callback) {
   fetch(urlStandard + name)
     .then((response) => response.json())
@@ -48,6 +54,14 @@ export async function getPokemonByName(urlStandard, name, callback) {
     .catch((error) => console.log(error));
 }
 
+/**
+ *
+ * @param {String} url rl de la pokeapi sin parametros
+ * @param {String} nombre nombre del pokemon
+ * @param {Event} e evento
+ * @param {HTMLElement} card carta a la que vamos a añadir la informacion y la imagen
+ * @param {HTMLElement} cardBody parte de la carta donde va la informacion como el tipo o las habiliades
+ */
 export async function getPokemonData(url, nombre, e, card, cardBody) {
   fetch(url + nombre)
     .then((response) => response.json())
